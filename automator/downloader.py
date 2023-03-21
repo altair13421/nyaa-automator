@@ -73,7 +73,7 @@ def actual_downloading(magnet=None, torrent_location=None, title=None, object=No
             if verbose:
                 progress.update(
                     download,
-                    description=f'[cyan]Peers: {stat.num_peers}[/cyan] [yellow]D/S: {stat.download_rate/1000}kbps[/yellow] [aquamarine1]U/S: {stat.upload_rate/1000}kbps[/aquamarine1] [sky_blue4]STATE: {get_state_strings(stat.state)}[/sky_blue4]',
+                    description=f'[cyan]Peers: {stat.num_peers}[/cyan] [yellow]D/S: {stat.download_rate/1000}kbps[/yellow] [aquamarine1]U/S: {stat.upload_rate/1000}kbps[/aquamarine1] [sky_blue4]STATE: {stat.state}[/sky_blue4]',
                     completed=stat.progress*100,
                     total=100,
                 )

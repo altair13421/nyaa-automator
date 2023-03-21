@@ -1,3 +1,4 @@
+
 import argparse
 from rich.console import Console
 from rich.table import Table
@@ -13,7 +14,7 @@ if __name__=="__main__":
     parser.add_argument('-sub_category', help="Get specific sub Category for it, Check readme for this", type=int)
     parser.add_argument('-filter', help="Filter", type=int)
     parser.add_argument('-page', help="On page", type=int)
-    parser.add_argument('-download', help='DOWNLOAD this Torrent and Download the Data too, Or Just Start the Magnet, Use Quotations,\
+    parser.add_argument('-download', nargs="+", help='DOWNLOAD this Torrent and Download the Data too, Or Just Start the Magnet, Use Quotations,\
         You can Even Point To a Torrent File, and It will Download, No matter which Porn', type=str)
     
     args = parser.parse_args()
@@ -31,9 +32,15 @@ if __name__=="__main__":
         table.add_column('Title', style='cyan')
         table.add_column('Size', style='green')
         table.add_column('Link', style='magenta')
-        table.add_column('magenet', style='magenta')
+        # table.add_column('magenet', style='magenta')
         for item in data:
-            table.add_row(item['category'], item['title'], item['size'], item['torrent_link'], item['magnet'])
+            table.add_row(
+                item['category'], 
+                item['title'], 
+                item['size'], 
+                item['torrent_link'], 
+                # item['magnet']
+            )
         console = Console()
         console.print(table)
     else:
@@ -47,8 +54,9 @@ if __name__=="__main__":
             r'(?::\d+)?' # optional port
             r'(?:/?|[/?]\S+)$', re.IGNORECASE
         )
-        title = args.download.split("/")[-1]
-        if re.match(regex, args.download):
-            download_torrent(torrent_link=args.download, title=title, verbose=True)
-        else:
-            download_torrent(magnet=args.download, title=title, verbose=True)
+        for download in args.download:
+            title = download.split("/")[-1]
+            if re.match(regex, download):
+                download_torrent(torrent_link=download, title=title, verbose=True)
+            else:
+                download_torrent(magnet=download, title=title, verbose=True)
