@@ -84,6 +84,7 @@ def actual_downloading(magnet=None, torrent_location=None, title=None, object=No
         move_downloaded(name=name_file, savepath=savepath)
     except Exception as e:
         rprint_error(f'Error {e} Occurred')
+    if verbose: rprint_success('Copied')
 
 # MAL List Getter or Something
 def get_anime(object=None):
