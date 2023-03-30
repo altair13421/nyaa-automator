@@ -34,6 +34,8 @@ if __name__=="__main__":
         table.add_column('Link', style='magenta')
         # table.add_column('magenet', style='magenta')
         for item in data:
+            if item['title'].__contains__('[/a/nonymous]'):
+                item['title'] = item['title'].replace("[/a/nonymous]", "")
             table.add_row(
                 item['category'], 
                 item['title'], 
