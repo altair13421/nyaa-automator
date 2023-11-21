@@ -45,6 +45,7 @@ if __name__=="__main__":
             )
         console = Console()
         console.print(table)
+        # Make a selector Using Questionary library?
     else:
         from automator.downloader import download_torrent
         import re
